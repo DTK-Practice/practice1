@@ -1,11 +1,14 @@
 source 'https://rubygems.org'
 
-#debug
-gem 'pry'
-gem 'pry-byebug'
-gem 'pry-coolline'
-gem 'pry-stack_explorer'
-gem 'awesome_print'
+group :development, :test do
+  gem 'pry'
+  gem 'pry-byebug'
+  gem 'pry-coolline'
+  gem 'pry-stack_explorer'
+  gem 'awesome_print'
+end
 
-#test
-gem 'rspec'
+group :test do
+  gem 'rspec'
+  gem 'simplecov', :require => false
+end
