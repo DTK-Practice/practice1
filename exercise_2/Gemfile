@@ -1,0 +1,11 @@
+source 'https://rubygems.org'
+
+#debug
+gem 'pry'
+gem 'pry-byebug'
+gem 'pry-coolline'
+gem 'pry-stack_explorer'
+gem 'awesome_print'
+
+#test
+gem 'rspec'
