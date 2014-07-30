@@ -1,5 +1,6 @@
 require_relative "../spec_helper"
 
+#Unit Test
 describe Organization do
   subject { org }
 
@@ -54,5 +55,24 @@ describe Organization do
 
       its(:root_org?) { should be false }
     end
+  end
+end
+
+#Functional Test
+describe Organization do
+  before :all do
+    @root = create_orgs
+  end
+
+  it "there is a Root Org" do
+    @root.root_org?.should be true
+  end
+
+  it "has 3 Orgs" do
+    @root.children.size.should eq(3)
+  end
+
+  it "each Org has 3 Child Orgs" do
+    @root.children.each{|org| org.children.size.should eq(3)}
   end
 end
