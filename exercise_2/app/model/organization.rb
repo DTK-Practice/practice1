@@ -1,6 +1,9 @@
 class Organization
   attr_accessor :name, :children, :parent
 
+  @@orgs = 0
+  @@child_orgs = 0
+
   def initialize(args={})
     @children = args.fetch(:children, [])
     @parent = args.fetch(:parent, nil)
@@ -13,16 +16,12 @@ class Organization
   end
 
   def root_org?
-    !has_parent?
+    parent.nil?
   end
 
   private
 
-  def has_parent?
-    !parent.nil?
-  end
-
   def default_name
-    "Root Org"
+    root_org? ? "Root Org":(parent.root_org? ? "Org #{@@orgs+=1}":"Child Org #{@@child_orgs+=1}")
   end
 end
