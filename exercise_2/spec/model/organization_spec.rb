@@ -13,12 +13,16 @@ describe Organization do
     end
 
     context "set values" do
+      before :all do
+        @parent_org = Organization.new
+      end
+
       let(:org) do
-        Organization.new({name: "First", parent: "Parent", children: [1,2,3] })
+        Organization.new({name: "First", parent: @parent_org, children: [1,2,3] })
       end
 
       its(:children) { should eq([1,2,3]) }
-      its(:parent) { should eq("Parent")  }
+      its(:parent) { should eq(@parent_org)  }
       its(:name) { should eq("First") }
     end
   end
@@ -46,7 +50,7 @@ describe Organization do
     end
 
     context "is not root org" do
-      let(:org) { Organization.new({parent: 1}) }
+      let(:org) { Organization.new({parent: Organization.new}) }
 
       its(:root_org?) { should be false }
     end
