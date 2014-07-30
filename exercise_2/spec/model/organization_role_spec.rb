@@ -1,39 +1,40 @@
 require_relative '../spec_helper.rb'
 
-describe UserOrganizationRole do
-  subject { user }
+describe OrganizationRole do
+  subject(:org_role) { OrganizationRole.new({organization: Organization.new}) }
+
   describe "#admin?" do
     context "is admin" do
-      let(:user) { UserOrganizationRole.new({role: Role.admin}) }
+      before :each do org_role.role = Role.admin end
       its(:admin?) { should be true }
     end
 
     context "not admin" do
-      let(:user) { UserOrganizationRole.new({role: Role.denied}) }
+      before :each do org_role.role = Role.denied end
       its(:admin?) { should be false }
     end
   end
 
   describe "#user?" do
     context "is user" do
-      let(:user) { UserOrganizationRole.new({role: Role.user}) }
+      before :each do org_role.role = Role.user end
       its(:user?) { should be true }
     end
 
     context "not user" do
-      let(:user) { UserOrganizationRole.new({role: Role.denied}) }
+      before :each do org_role.role = Role.denied end
       its(:user?) { should be false }
     end
   end
 
   describe "#denied?" do
     context "is denied" do
-      let(:user) { UserOrganizationRole.new({role: Role.denied}) }
+      before :each do org_role.role = Role.denied end
       its(:denied?) { should be true }
     end
 
     context "not denied" do
-      let(:user) { UserOrganizationRole.new({role: Role.admin}) }
+      before :each do org_role.role = Role.admin end
       its(:denied?) { should be false }
     end
   end

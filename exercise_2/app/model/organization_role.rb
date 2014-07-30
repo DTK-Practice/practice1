@@ -1,9 +1,10 @@
-class UserOrganizationRole
-  attr_accessor :user, :organization, :role
+class OrganizationRole
+  attr_accessor :organization, :role
 
   def initialize(args={})
-    @user = args.fetch(:user, nil)
     @organization = args.fetch(:organization, nil)
+    raise "Organization is required." if @organization.nil?
+
     @role = args.fetch(:role, Role.denied)
   end
 
