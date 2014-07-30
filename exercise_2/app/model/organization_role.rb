@@ -19,4 +19,9 @@ class OrganizationRole
   def denied?
     role == Role.denied
   end
+
+  def ==(other_org_role)
+    return organization == other_org_role.organization &&
+              role == other_org_role.role
+  end
 end

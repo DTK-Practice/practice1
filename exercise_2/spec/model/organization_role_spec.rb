@@ -38,4 +38,33 @@ describe OrganizationRole do
       its(:denied?) { should be false }
     end
   end
+
+  describe "#==" do
+    before :each do
+      @org1 = Organization.new({name: "First"})
+      @org2 = Organization.new({name: "Second"})
+
+      @org_role1 = OrganizationRole.new({organization: @org1, role: Role.admin})
+      @org_role2 = OrganizationRole.new({organization: @org2, role: Role.admin})
+      @org_role3 = OrganizationRole.new({organization: @org1, role: Role.denied})
+      @org_role4 = OrganizationRole.new({organization: @org2, role: Role.denied})
+      @org_role5 = OrganizationRole.new({organization: @org1, role: Role.admin})
+    end
+
+    it "org_role1 should not equal org_role2" do
+      @org_role1.should_not == @org_role2
+    end
+
+    it "org_role1 should not equal org_role3" do
+      @org_role1.should_not == @org_role3
+    end
+
+    it "org_role1 should not equal org_role4" do
+      @org_role1.should_not == @org_role4
+    end
+
+    it "org_role1 should equal org_role5" do
+      @org_role1.should == @org_role5
+    end
+  end
 end
